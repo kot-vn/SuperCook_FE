@@ -19,6 +19,20 @@ $ yarn generate #k cần quan tâm
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
+## Deploy Setup
+
+```bash
+# generate static web application
+$ yarn generate
+
+# install push-dir package
+$ yarn add --dev push-dir
+
+# generate and deploy static application
+$ yarn generate
+$ yarn deploy
+```
+
 ## Special Directories
 
 You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
