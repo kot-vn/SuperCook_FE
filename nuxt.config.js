@@ -1,4 +1,9 @@
 export default {
+  target: 'static',
+  router: {
+    base: '/SuperCook_FE/',
+  },
+
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
