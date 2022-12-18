@@ -19,7 +19,9 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/SuperCook_FE/favicon.png' },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
