@@ -1,7 +1,7 @@
 <template>
   <div>
     <SharedHeader></SharedHeader>
-    <h1>test</h1>
+    <h1>Client layout</h1>
     <Nuxt />
   </div>
 </template>
@@ -10,6 +10,7 @@
 import SharedHeader from '~/components/client/shared/SharedHeader.vue'
 
 export default {
+  components: { SharedHeader },
   data() {
     return {
       title: 'SuperCook - Zero Waste Recipe',
@@ -22,8 +23,11 @@ export default {
   },
   mounted() {},
   methods: {},
-  components: { SharedHeader },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+::v-deep {
+  @import '@/assets/styles/client/client.scss';
+}
+</style>
