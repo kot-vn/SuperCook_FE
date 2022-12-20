@@ -1,16 +1,19 @@
 <template>
   <div>
     <SharedHeader></SharedHeader>
-    <h1>Client layout</h1>
-    <Nuxt />
+    <aside>
+      <SharedSidebar></SharedSidebar>
+    </aside>
+    <main>
+      <Nuxt />
+    </main>
   </div>
 </template>
-
 <script>
 import SharedHeader from '~/components/client/shared/SharedHeader.vue'
-
+import SharedSidebar from '~/components/client/shared/SharedSidebar.vue'
 export default {
-  components: { SharedHeader },
+  components: { SharedHeader, SharedSidebar },
   data() {
     return {
       title: 'SuperCook - Zero Waste Recipe',
@@ -25,7 +28,6 @@ export default {
   methods: {},
 }
 </script>
-
 <style lang="scss" scoped>
 ::v-deep {
   @import '@/assets/styles/client/client.scss';
