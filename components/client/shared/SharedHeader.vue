@@ -2,6 +2,9 @@
   <header>
     <div class="header-wrapper p-4">
       <div class="brand-name pb-4">
+        <div v-b-toggle.sidebar class="sidebar-toggle-btn">
+          <span class="mdi mdi-menu"></span>
+        </div>
         <h1 class="mx-auto">SuperCook</h1>
       </div>
       <div class="search-bar">
@@ -17,7 +20,6 @@
     </div>
   </header>
 </template>
-
 <script>
 export default {
   data() {
@@ -25,11 +27,8 @@ export default {
       searchValue: null,
     }
   },
-
   mounted() {},
-
   methods: {},
 }
 </script>
-
 <style lang="scss" scoped></style>
