@@ -11,6 +11,9 @@
         <div class="brand-name pb-4">
           <h1 class="mx-auto">Pantry</h1>
         </div>
+        <div v-if="showBackdrop" v-b-toggle.sidebar class="close-sidebar-btn">
+          <span class="mdi mdi-close"></span>
+        </div>
         <div class="search-bar">
           <b-form-input
             v-model="ingredientSearchValue"
