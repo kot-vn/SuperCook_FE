@@ -31,5 +31,10 @@ export default {
 <style lang="scss" scoped>
 ::v-deep {
   @import '@/assets/styles/client/client.scss';
+  .b-sidebar {
+    .b-sidebar-body {
+      overflow: hidden !important;
+    }
+  }
 }
 </style>
