@@ -25,11 +25,17 @@
           <span class="mdi mdi-magnify"></span>
         </div>
       </div>
+      <div class="sidebar-body p-4">
+        <IngredientCategory></IngredientCategory>
+      </div>
     </b-sidebar>
   </div>
 </template>
 <script>
+import IngredientCategory from '../IngredientCategory.vue'
+
 export default {
+  components: { IngredientCategory },
   data() {
     return {
       visible: true,
