@@ -36,9 +36,9 @@ export default {
 ::v-deep {
   @import '@/assets/styles/client/client.scss';
   main {
-    margin-left: 450px;
-    @media only screen and (max-width: 900px) {
-      margin-left: 0;
+    margin-left: 0px;
+    @media only screen and (min-width: 900px) {
+      margin-left: 450px;
     }
   }
   .b-sidebar {
