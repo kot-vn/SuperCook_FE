@@ -4,17 +4,17 @@
 
 ```bash
 # install dependencies (1)
-$ yarn install #lệnh cài dependencies (dùng khi chạy project lần đầu tiên hoặc khi có cài thêm thư viện mới)
+$ yarn install
 
 # serve with hot reload at localhost:3000 (2)
-$ yarn dev #lệnh run project
+$ yarn dev 
 
 # build for production and launch server
-$ yarn build #k cần quan tâm
-$ yarn start #k cần quan tâm
+$ yarn build 
+$ yarn start 
 
 # generate static project
-$ yarn generate #k cần quan tâm
+$ yarn generate 
 ```
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).

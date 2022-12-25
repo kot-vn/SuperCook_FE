@@ -5,16 +5,21 @@
       no-header
       :bg-variant="sidebarBG"
       :backdrop="showBackdrop"
+      width="450px"
       :visible="visible"
     >
       <div class="sidebar-wrapper p-4">
         <div class="brand-name pb-4">
-          <h1 class="mx-auto">Pantry</h1>
+          <h1 class="mx-auto text-white">Pantry</h1>
         </div>
-        <div v-if="showBackdrop" v-b-toggle.sidebar class="close-sidebar-btn">
+        <div
+          v-if="showBackdrop"
+          v-b-toggle.sidebar
+          class="close-sidebar-btn text-white position-absolute"
+        >
           <span class="mdi mdi-close"></span>
         </div>
-        <div class="search-bar">
+        <div class="search-bar position-relative">
           <b-form-input
             v-model="ingredientSearchValue"
             class="pl-5"
@@ -22,10 +27,10 @@
             placeholder="Add/remove ingredients..."
           >
           </b-form-input>
-          <span class="mdi mdi-magnify"></span>
+          <span class="mdi mdi-magnify position-absolute"></span>
         </div>
       </div>
-      <div class="sidebar-body p-4">
+      <div class="sidebar-body overflow-auto p-4">
         <IngredientCategory></IngredientCategory>
       </div>
     </b-sidebar>
@@ -51,7 +56,7 @@ export default {
   methods: {
     showSidebar() {
       const screenWidth = screen.width
-      if (screenWidth <= 700) {
+      if (screenWidth <= 900) {
         this.visible = false
         this.showBackdrop = true
         this.sidebarBG = 'white'

@@ -2,12 +2,9 @@
   background: url('@/assets/images/vegetable_pattern.svg')
     var(--background-pink);
   .brand-name {
-    position: relative;
     .sidebar-toggle-btn {
-      position: absolute;
       top: 5px;
       left: 10px;
-      color: white;
       cursor: pointer;
       transition: 0.2s all ease-in-out;
       :hover {
@@ -15,15 +12,12 @@
       }
     }
     h1 {
-      color: white;
       font-size: 24px;
       width: fit-content;
     }
   }
   .search-bar {
-    position: relative;
     span {
-      position: absolute;
       color: var(--icon-grey);
       font-size: 1.5rem;
       top: 0px;
@@ -36,22 +30,17 @@
     var(--background-pink);
   .brand-name {
     h1 {
-      color: white;
       font-size: 24px;
       width: fit-content;
     }
   }
   .close-sidebar-btn {
-    position: absolute;
     right: 20px;
     top: 1.5rem;
-    color: white;
     font-size: 1.5rem;
   }
   .search-bar {
-    position: relative;
     span {
-      position: absolute;
       color: var(--icon-grey);
       font-size: 1.5rem;
       top: 0px;
@@ -69,9 +58,6 @@
       }
     }
     .right-section {
-      .cate-title {
-        font-weight: bold;
-      }
       .cate-counter {
         color: rgba(79, 80, 90, 0.6);
         font-size: 13px;
@@ -81,24 +67,44 @@
 }
 .ingredient-list {
   .ingredient-item {
-    display: inline-block;
     margin: 5px;
     padding: 10px;
-    border-radius: 4px;
     background-color: rgba(181, 191, 200, 0.2);
     color: rgba(79, 80, 90, 0.6);
     font-size: 14px;
     line-height: 20px;
-    text-decoration: none;
   }
 }
 .sidebar-body {
   height: calc(100% - 150px);
-  overflow-y: auto;
 }
-@media only screen and (min-width: 700px) {
+.recipe-detail {
+  .recipe-detail-header {
+    height: 400px;
+    .close-sidebar-btn {
+      width: 35px;
+      height: 35px;
+      color: black;
+      top: 10px;
+      left: 10px;
+      font-size: 20px;
+    }
+    img {
+      object-fit: cover;
+    }
+  }
+  .recipe-detail-body {
+    .recipe-title {
+      top: -30px;
+      max-height: 56px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+@media only screen and (min-width: 900px) {
   .header-wrapper {
-    padding-left: 350px !important;
+    padding-left: 450px !important;
     .brand-name {
       .sidebar-toggle-btn {
         display: none;
