@@ -31,7 +31,6 @@
             Instant Pot Perfect Hard Boiled Eggs
           </div>
           <div class="recipe-ingredients">
-            <p class="font-weight-bold">Ingredients</p>
             <div>
               <b-table
                 responsive
@@ -74,4 +73,12 @@ export default {
   methods: {},
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+::v-deep {
+  .b-sidebar {
+    .b-sidebar-body {
+      overflow: auto !important;
+    }
+  }
+}
+</style>
