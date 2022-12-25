@@ -6,14 +6,18 @@
     </aside>
     <main>
       <Nuxt />
+      <aside>
+        <RecipeSidebar></RecipeSidebar>
+      </aside>
     </main>
   </div>
 </template>
 <script>
+import RecipeSidebar from '~/components/client/RecipeSidebar.vue'
 import SharedHeader from '~/components/client/shared/SharedHeader.vue'
 import SharedSidebar from '~/components/client/shared/SharedSidebar.vue'
 export default {
-  components: { SharedHeader, SharedSidebar },
+  components: { SharedHeader, SharedSidebar, RecipeSidebar },
   data() {
     return {
       title: 'SuperCook - Zero Waste Recipe',
@@ -31,6 +35,12 @@ export default {
 <style lang="scss" scoped>
 ::v-deep {
   @import '@/assets/styles/client/client.scss';
+  main {
+    margin-left: 450px;
+    @media only screen and (max-width: 900px) {
+      margin-left: 0;
+    }
+  }
   .b-sidebar {
     .b-sidebar-body {
       overflow: hidden !important;

@@ -18,22 +18,25 @@
             class="right-section p-2 d-flex justify-content-start align-items-center"
           >
             <div class="w-100">
-              <span class="cate-title">Vegetables & Greens</span>
+              <span class="cate-title font-weight-bold"
+                >Vegetables & Greens</span
+              >
               <br />
               <span class="cate-counter">100 Ingredients</span>
             </div>
           </div>
         </div>
       </b-card-header>
-      <b-collapse :id="'accordion' + index" visible role="tabpanel">
+      <b-collapse :id="'accordion' + index" role="tabpanel">
         <b-card-body class="p-2">
           <div class="ingredient-list">
             <span
-              v-for="(item, ingredientIndex) in 10"
+              v-for="(ingredient, ingredientIndex) in 10"
               :key="ingredientIndex"
-              class="ingredient-item"
-              >abc</span
+              class="ingredient-item d-inline-block rounded text-decoration-none"
             >
+              {{ ingredient + 'accordion' + index }}
+            </span>
           </div>
         </b-card-body>
       </b-collapse>
