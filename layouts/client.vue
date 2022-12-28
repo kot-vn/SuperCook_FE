@@ -41,10 +41,5 @@ export default {
       margin-left: 450px;
     }
   }
-  .b-sidebar {
-    .b-sidebar-body {
-      overflow: hidden !important;
-    }
-  }
 }
 </style>

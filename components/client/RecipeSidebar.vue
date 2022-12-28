@@ -73,12 +73,4 @@ export default {
   methods: {},
 }
 </script>
-<style lang="scss" scoped>
-::v-deep {
-  .b-sidebar {
-    .b-sidebar-body {
-      overflow: auto !important;
-    }
-  }
-}
-</style>
+<style lang="scss" scoped></style>
