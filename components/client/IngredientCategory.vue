@@ -11,16 +11,15 @@
           <div class="left-section p-2">
             <img
               src="https://www.supercook.com/statics/sicons/All%20cuisines.png"
-              alt=""
             />
           </div>
           <div
             class="right-section p-2 d-flex justify-content-start align-items-center"
           >
             <div class="w-100">
-              <span class="cate-title font-weight-bold"
-                >Vegetables & Greens</span
-              >
+              <span class="cate-title font-weight-bold">
+                Vegetables & Greens
+              </span>
               <br />
               <span class="cate-counter">100 Ingredients</span>
             </div>
