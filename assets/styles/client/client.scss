@@ -103,7 +103,7 @@
   }
 }
 .main-search-result {
-  height: 85vh;
+  height: calc(100vh - 147px);
 }
 @media only screen and (min-width: 900px) {
   .header-wrapper {
