@@ -50,6 +50,7 @@ export default {
     '@nuxtjs/axios',
     'nuxt-material-design-icons-iconfont',
     'nuxtjs-mdi-font',
+    '@nuxtjs/axios',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
