@@ -3,10 +3,10 @@
 ## Build Setup
 
 ```bash
-# install dependencies (1)
+# install dependencies
 $ yarn install
 
-# serve with hot reload at localhost:3000 (2)
+# serve with hot reload at localhost:3000
 $ yarn dev 
 
 # build for production and launch server
