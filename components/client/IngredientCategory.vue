@@ -1,40 +1,45 @@
 <template>
   <div class="ingredient-category-wrapper">
-    <b-card v-for="(item, index) in 10" :key="index" no-body class="mb-1">
+    <b-card
+      v-for="ingredientCategory in ingredientCategories"
+      :key="ingredientCategory.id"
+      no-body
+      class="mb-1"
+    >
       <b-card-header
-        v-b-toggle="'accordion' + index"
+        v-b-toggle="'accordion' + ingredientCategory.id"
         header-tag="header"
         class="p-1"
         role="tab"
       >
         <div class="accordion-header-wrapper d-flex">
           <div class="left-section p-2">
-            <img
-              src="https://www.supercook.com/statics/sicons/All%20cuisines.png"
-            />
+            <img :src="ingredientCategory.icon" />
           </div>
           <div
             class="right-section p-2 d-flex justify-content-start align-items-center"
           >
             <div class="w-100">
               <span class="cate-title font-weight-bold">
-                Vegetables & Greens
+                {{ ingredientCategory.categoryName }}
               </span>
               <br />
-              <span class="cate-counter">100 Ingredients</span>
+              <span class="cate-counter">
+                {{ ingredientCategory.total }} Ingredients
+              </span>
             </div>
           </div>
         </div>
       </b-card-header>
-      <b-collapse :id="'accordion' + index" role="tabpanel">
+      <b-collapse :id="'accordion' + ingredientCategory.id" role="tabpanel">
         <b-card-body class="p-2">
           <div class="ingredient-list">
             <span
-              v-for="(ingredient, ingredientIndex) in 10"
-              :key="ingredientIndex"
+              v-for="ingredient in ingredientCategory.ingredientDtoList"
+              :key="ingredient.id"
               class="ingredient-item d-inline-block rounded text-decoration-none"
             >
-              {{ ingredient + 'accordion' + index }}
+              {{ ingredient.name }}
             </span>
           </div>
         </b-card-body>
@@ -44,6 +49,12 @@
 </template>
 <script>
 export default {
+  props: {
+    ingredientCategories: {
+      type: Array,
+      default: null,
+    },
+  },
   data() {
     return {}
   },
