@@ -18,6 +18,11 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
+      // turn off on localhost
+      {
+        'http-equiv': 'Content-Security-Policy',
+        content: 'upgrade-insecure-requests',
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/SuperCook_FE/favicon.png' },
