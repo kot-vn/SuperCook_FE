@@ -31,13 +31,18 @@
         </div>
       </div>
       <div class="sidebar-body overflow-auto p-4">
-        <IngredientCategory></IngredientCategory>
+        <IngredientCategory
+          :ingredient-categories="ingredientCategories.data"
+        ></IngredientCategory>
       </div>
     </b-sidebar>
   </div>
 </template>
 <script>
+import { createNamespacedHelpers } from 'vuex'
 import IngredientCategory from '../IngredientCategory.vue'
+
+const { mapState } = createNamespacedHelpers('client')
 
 export default {
   components: { IngredientCategory },
@@ -48,6 +53,9 @@ export default {
       ingredientSearchValue: null,
       sidebarBG: 'unset',
     }
+  },
+  computed: {
+    ...mapState(['ingredientCategories']),
   },
   created() {
     this.showSidebar()

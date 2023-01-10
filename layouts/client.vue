@@ -13,9 +13,13 @@
   </div>
 </template>
 <script>
+import { createNamespacedHelpers } from 'vuex'
 import RecipeSidebar from '~/components/client/RecipeSidebar.vue'
 import SharedHeader from '~/components/client/shared/SharedHeader.vue'
 import SharedSidebar from '~/components/client/shared/SharedSidebar.vue'
+
+const { mapActions } = createNamespacedHelpers('client')
+
 export default {
   components: { SharedHeader, SharedSidebar, RecipeSidebar },
   data() {
@@ -28,8 +32,12 @@ export default {
       title: this.title,
     }
   },
-  mounted() {},
-  methods: {},
+  mounted() {
+    this.fetchIngredientCategories()
+  },
+  methods: {
+    ...mapActions(['fetchIngredientCategories']),
+  },
 }
 </script>
 <style lang="scss" scoped>
