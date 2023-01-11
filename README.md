@@ -15,7 +15,7 @@ yarn serve
 yarn build
 git add dist -f
 git commit -m 'adding dist subtree' --no-verify
-git subtree push --prefix dist origin gh-pages
+git subtree push --prefix dist origin github-pages
 ```
 
 ### Lints and fixes files
