@@ -1,5 +1,5 @@
 const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
   transpileDependencies: true,
-  publicPath: process.env.NODE_ENV === "production" ? "SuperCook" : "/",
+  publicPath: process.env.NODE_ENV === "production" ? "SuperCook_FE" : "/",
 });
