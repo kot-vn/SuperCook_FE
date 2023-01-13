@@ -1,8 +1,10 @@
-@import '@/assets/styles/common.scss';
+@import "@/assets/styles/common.scss";
 
 .header-wrapper {
-  background: url('@/assets/images/vegetable_pattern.svg')
+  background: url("@/assets/images/vegetable_pattern.svg")
     var(--background-pink);
+  height: 150px;
+  max-height: 150px;
   .brand-name {
     .sidebar-toggle-btn {
       top: 5px;
@@ -28,8 +30,10 @@
   }
 }
 .sidebar-wrapper {
-  background: url('@/assets/images/vegetable_pattern.svg')
+  background: url("@/assets/images/vegetable_pattern.svg")
     var(--background-pink);
+  height: 150px;
+  max-height: 150px;
   .brand-name {
     h1 {
       font-size: 24px;
@@ -42,11 +46,15 @@
     font-size: 1.5rem;
   }
   .search-bar {
-    span {
-      color: var(--icon-grey);
-      font-size: 1.2rem;
-      top: 8px;
-      left: 15px;
+    height: 40px;
+    max-height: 40px;
+    .multiselect {
+      .multiselect__select {
+        height: 40px;
+      }
+      .multiselect__tags {
+        max-height: 40px;
+      }
     }
   }
 }

@@ -19,26 +19,43 @@
         <i class="fa-solid fa-xmark"></i>
       </div>
       <div class="search-bar position-relative">
-        <b-form-input
+        <multiselect
           v-model="ingredientSearchValue"
-          class="pl-5"
-          type="search"
+          :options="ingredients"
+          :multiple="true"
+          :close-on-select="false"
+          :clear-on-select="false"
+          :preserve-search="true"
           placeholder="Add/remove ingredients..."
+          label="name"
+          track-by="name"
+          :preselect-first="true"
         >
-        </b-form-input>
-        <span class="fa-solid fa-magnifying-glass position-absolute"></span>
+          <template slot="selection" slot-scope="{ values, search, isOpen }">
+            <span
+              class="multiselect__single"
+              v-if="values.length &amp;&amp; !isOpen"
+            >
+              {{ values.length }} options selected
+            </span>
+          </template>
+        </multiselect>
       </div>
     </div>
     <div class="sidebar-body overflow-auto p-4">
       <IngredientCategory
-        :ingredient-categories="ingredientCategories.data"
+        :ingredient-categories="ingredientCategories"
       ></IngredientCategory>
     </div>
   </b-sidebar>
 </template>
 
 <script>
+import { createNamespacedHelpers } from "vuex";
 import IngredientCategory from "@/components/client/IngredientCategory.vue";
+import Multiselect from "vue-multiselect";
+
+const { mapState } = createNamespacedHelpers("client");
 
 export default {
   data() {
@@ -51,6 +68,10 @@ export default {
   },
   components: {
     IngredientCategory,
+    Multiselect,
+  },
+  computed: {
+    ...mapState(["ingredientCategories", "ingredients"]),
   },
   mounted() {},
   created() {

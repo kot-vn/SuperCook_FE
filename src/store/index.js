@@ -1,10 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
-import userToken from "./modules/userToken";
+import adminGlobal from "./modules/admin/global";
+import client from "./modules/client";
 
 const dataState = createPersistedState({
-  paths: ["userToken.token"],
+  paths: ["adminGlobal.token"],
 });
 
 Vue.use(Vuex);
@@ -14,6 +15,6 @@ export default new Vuex.Store({
   getters: {},
   mutations: {},
   actions: {},
-  modules: { userToken },
+  modules: { adminGlobal, client },
   plugins: [dataState],
 });
