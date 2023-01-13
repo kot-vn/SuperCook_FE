@@ -17,27 +17,37 @@
           </div>
         </div>
       </div>
-      <aside></aside>
+      <aside>
+        <RecipeSidebar></RecipeSidebar>
+      </aside>
     </main>
   </div>
 </template>
 
 <script>
+import { createNamespacedHelpers } from "vuex";
 import RecipeItem from "@/components/client/RecipeItem.vue";
+import RecipeSidebar from "@/components/client/RecipeSidebar.vue";
 import SharedHeader from "@/components/client/shared/SharedHeader.vue";
 import SharedSidebar from "@/components/client/shared/SharedSidebar.vue";
+
+const { mapActions } = createNamespacedHelpers("client");
 
 export default {
   components: {
     RecipeItem,
     SharedHeader,
     SharedSidebar,
+    RecipeSidebar,
   },
   data() {
     return {};
   },
-  mounted() {},
-  methods: {},
+  mounted() {
+    this.fetchIngredientCategories();
+    this.fetchIngredients();
+  },
+  methods: { ...mapActions(["fetchIngredientCategories", "fetchIngredients"]) },
 };
 </script>
 
