@@ -83,6 +83,16 @@
     color: rgba(79, 80, 90, 0.6);
     font-size: 14px;
     line-height: 20px;
+    transition: 0.2s all ease-in-out;
+  }
+  .ingredient-item:hover {
+    color: white;
+    background-color: var(--success-green);
+    cursor: pointer;
+  }
+  .ingredient-item.active {
+    background-color: var(--success-green);
+    color: white;
   }
 }
 .sidebar-body {
@@ -113,5 +123,5 @@
   }
 }
 .main-search-result {
-  height: calc(100vh - 147px);
+  height: calc(100vh - 150px);
 }

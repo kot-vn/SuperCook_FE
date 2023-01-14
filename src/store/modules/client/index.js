@@ -10,6 +10,7 @@ export default {
   state: {
     ingredientCategories: [],
     ingredients: [],
+    ingredientSearchValue: [],
   },
   getters: {
     getField,
