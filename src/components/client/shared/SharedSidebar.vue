@@ -52,6 +52,7 @@
 
 <script>
 import { createNamespacedHelpers } from "vuex";
+import { mapFields } from "vuex-map-fields";
 import IngredientCategory from "@/components/client/IngredientCategory.vue";
 import Multiselect from "vue-multiselect";
 
@@ -62,7 +63,6 @@ export default {
     return {
       visible: true,
       showBackdrop: false,
-      ingredientSearchValue: null,
       sidebarBG: "unset",
     };
   },
@@ -71,6 +71,9 @@ export default {
     Multiselect,
   },
   computed: {
+    ...mapFields("client", {
+      ingredientSearchValue: "ingredientSearchValue",
+    }),
     ...mapState(["ingredientCategories", "ingredients"]),
   },
   mounted() {},

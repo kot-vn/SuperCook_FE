@@ -38,6 +38,8 @@
               v-for="ingredient in ingredientCategory.ingredientDtoList"
               :key="ingredient.id"
               class="ingredient-item d-inline-block rounded text-decoration-none"
+              :class="{ active: isActive(ingredient.id) }"
+              @click="setIngredient(ingredient)"
             >
               {{ ingredient.name }}
             </span>
@@ -48,6 +50,9 @@
   </div>
 </template>
 <script>
+import { mapFields } from "vuex-map-fields";
+import _ from "lodash";
+
 export default {
   props: {
     ingredientCategories: {
@@ -55,11 +60,32 @@ export default {
       default: null,
     },
   },
+  computed: {
+    ...mapFields("client", {
+      ingredientSearchValue: "ingredientSearchValue",
+    }),
+  },
   data() {
     return {};
   },
   mounted() {},
-  methods: {},
+  methods: {
+    isActive(id) {
+      return this.ingredientSearchValue.find((x) =>
+        x.id === id ? true : false
+      );
+    },
+    setIngredient(payload) {
+      this.isActive(payload.id)
+        ? this.ingredientSearchValue.splice(
+            this.ingredientSearchValue.findIndex(function (i) {
+              return i.id === payload.id;
+            }),
+            1
+          )
+        : this.ingredientSearchValue.push(payload);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped></style>
