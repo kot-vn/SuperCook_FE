@@ -10,7 +10,7 @@
         </div>
         <h1 class="mx-auto text-white">SuperCook</h1>
       </div>
-      <div class="search-bar position-relative">
+      <div class="search-bar pl-2 position-relative">
         <b-form-input
           v-model="searchValue"
           class="pl-5"

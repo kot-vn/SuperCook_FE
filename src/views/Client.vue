@@ -5,7 +5,7 @@
       <SharedSidebar></SharedSidebar>
     </aside>
     <main class="main">
-      <div class="main-search-result overflow-auto">
+      <div class="main-search-result pl-2 overflow-auto">
         <h2 class="py-4">You can make 30 recipes</h2>
         <div class="recipe-list">
           <div
