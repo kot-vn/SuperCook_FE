@@ -1,10 +1,14 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <Loader v-if="showLoading"></Loader>
   </div>
 </template>
 
 <script>
+import Loader from "./components/shared/Loader.vue";
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {};
@@ -12,8 +16,12 @@ export default {
   metaInfo() {
     return { title: "SuperCook - Zero Waste Recipe" };
   },
+  computed: {
+    ...mapState(["showLoading"]),
+  },
   mounted() {},
   methods: {},
+  components: { Loader },
 };
 </script>
 
