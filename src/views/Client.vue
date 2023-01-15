@@ -11,7 +11,7 @@
           <div
             v-for="(item, index) in 30"
             :key="index"
-            class="w-50 px-2 d-inline-block"
+            class="w-50 recipe-item px-2 d-inline-block"
           >
             <RecipeItem></RecipeItem>
           </div>
