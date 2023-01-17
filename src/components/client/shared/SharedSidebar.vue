@@ -29,7 +29,7 @@
           placeholder="Add/remove ingredients..."
           label="name"
           track-by="name"
-          :preselect-first="true"
+          :options-limit="300"
         >
           <template slot="selection" slot-scope="{ values, search, isOpen }">
             <span
