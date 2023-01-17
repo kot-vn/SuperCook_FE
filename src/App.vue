@@ -10,17 +10,12 @@ import Loader from "./components/shared/Loader.vue";
 import { mapState } from "vuex";
 
 export default {
-  data() {
-    return {};
-  },
   metaInfo() {
     return { title: "SuperCook - Zero Waste Recipe" };
   },
   computed: {
     ...mapState(["showLoading"]),
   },
-  mounted() {},
-  methods: {},
   components: { Loader },
 };
 </script>

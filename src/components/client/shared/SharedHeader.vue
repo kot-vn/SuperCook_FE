@@ -29,8 +29,6 @@ export default {
   data() {
     return { searchValue: null };
   },
-  mounted() {},
-  methods: {},
 };
 </script>
 

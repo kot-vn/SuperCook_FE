@@ -49,6 +49,7 @@
     </b-card>
   </div>
 </template>
+
 <script>
 import { mapFields } from "vuex-map-fields";
 import _ from "lodash";
@@ -65,10 +66,6 @@ export default {
       ingredientSearchValue: "ingredientSearchValue",
     }),
   },
-  data() {
-    return {};
-  },
-  mounted() {},
   methods: {
     isActive(id) {
       return this.ingredientSearchValue.find((x) =>
@@ -88,4 +85,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped></style>
