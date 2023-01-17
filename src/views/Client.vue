@@ -40,9 +40,6 @@ export default {
     SharedSidebar,
     RecipeSidebar,
   },
-  data() {
-    return {};
-  },
   mounted() {
     this.fetchIngredientCategories();
     this.fetchIngredients();

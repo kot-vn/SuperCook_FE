@@ -87,11 +87,11 @@
     font-size: 14px;
     line-height: 20px;
     transition: 0.2s all ease-in-out;
-  }
-  &:hover {
-    color: white;
-    background-color: var(--success-green);
-    cursor: pointer;
+    &:hover {
+      color: white;
+      background-color: var(--success-green);
+      cursor: pointer;
+    }
   }
   .ingredient-item.active {
     background-color: var(--success-green);

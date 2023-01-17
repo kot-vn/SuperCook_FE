@@ -76,7 +76,6 @@ export default {
     }),
     ...mapState(["ingredientCategories", "ingredients"]),
   },
-  mounted() {},
   created() {
     this.showSidebar();
   },
@@ -92,5 +91,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped></style>
