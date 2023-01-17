@@ -8,7 +8,6 @@
       width="450px"
       right
       shadow
-      visible
     >
       <div class="recipe-detail">
         <section class="recipe-detail-header w-100 position-relative">
