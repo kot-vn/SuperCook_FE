@@ -1,13 +1,22 @@
 import { getField, updateField } from "vuex-map-fields";
+import axios from "@/plugins/axios";
 
 const CLEAR_TOKEN = "CLEAR_TOKEN";
 const SET_TOKEN = "SET_TOKEN";
+const SET_ERROR = "SET_ERROR";
 
 export default {
   namespaced: true,
   strict: true,
   state: {
     token: null,
+    email: "",
+    emailBlurred: false,
+    valid: false,
+    submitted: false,
+    password: "",
+    passwordBlurred: false,
+    errorMsg: null,
   },
   getters: {
     getField,
@@ -19,9 +28,29 @@ export default {
     clearToken({ commit }) {
       commit(CLEAR_TOKEN);
     },
+    async adminAuthenticate({ commit, state }) {
+      commit(CLEAR_TOKEN);
+      await axios
+        .post("user/signin", {
+          username: state.email,
+          password: state.password,
+        })
+        .then((res) => {
+          if (res.status == 200) {
+            commit(SET_TOKEN, res.data.data.token);
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+          commit(SET_ERROR, "Something wrong, please try again later!");
+        });
+    },
   },
   mutations: {
     updateField,
+    SET_ERROR(state, payload) {
+      state.errorMsg = payload;
+    },
     SET_TOKEN(state, payload) {
       state.token = payload;
     },

@@ -1,0 +1,37 @@
+@import "@/assets/styles/common.scss";
+
+.admin-login {
+  .forms-inputs {
+    position: relative;
+    span {
+      top: -18px;
+      left: 10px;
+      background-color: white;
+      padding: 5px 10px;
+      font-size: 15px;
+    }
+    input {
+      height: 50px;
+      border: 2px solid var(--background-pink);
+      &:focus {
+        box-shadow: none;
+        outline: none;
+        border: 2px solid var(--background-pink);
+      }
+    }
+  }
+  .btn {
+    height: 50px;
+    border-color: var(--background-pink) !important;
+    background: var(--background-pink);
+    transition: 0.2s all ease-in-out;
+    &:hover,
+    &:focus {
+      background: var(--background-pink-hover);
+    }
+  }
+  .fa-circle-check {
+    font-size: 50px;
+    color: var(--success-green);
+  }
+}
