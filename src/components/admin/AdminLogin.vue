@@ -39,7 +39,7 @@
                   v-on:blur="passwordBlurred = true"
                 />
                 <div class="invalid-feedback">
-                  Password must be 8 character!
+                  Password must be in valid form!
                 </div>
               </div>
               <div class="mb-3">
@@ -120,7 +120,8 @@ export default {
       }
     },
     validPassword(password) {
-      if (password.length > 7) {
+      var re = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+      if (re.test(password)) {
         return true;
       }
     },
