@@ -51,13 +51,22 @@
         class="profile d-flex position-relative align-items-center justify-content-start"
       >
         <h6 class="m-0">Logout</h6>
-        <i class="bx bx-log-out position-absolute" id="log_out" />
+        <i
+          class="bx bx-log-out position-absolute"
+          id="log_out"
+          @click="logout"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { createNamespacedHelpers } from "vuex";
+import { mapFields } from "vuex-map-fields";
+
+const { mapMutations } = createNamespacedHelpers("adminGlobal");
+
 export default {
   props: {
     isMenuOpen: {
@@ -119,6 +128,16 @@ export default {
       isOpened: false,
     };
   },
+  computed: {
+    ...mapFields("adminGlobal", {
+      email: "email",
+      emailBlurred: "emailBlurred",
+      valid: "valid",
+      submitted: "submitted",
+      password: "password",
+      passwordBlurred: "passwordBlurred",
+    }),
+  },
   mounted() {
     this.isOpened = this.isMenuOpen;
   },
@@ -128,6 +147,19 @@ export default {
         this.isOpened && this.isPaddingLeft
           ? this.menuOpenedPaddingLeftBody
           : this.menuClosedPaddingLeftBody;
+    },
+  },
+  methods: {
+    ...mapMutations(["CLEAR_TOKEN"]),
+    logout() {
+      this.CLEAR_TOKEN();
+      this.email = "";
+      this.emailBlurred = false;
+      this.valid = false;
+      this.submitted = false;
+      this.password = "";
+      this.passwordBlurred = false;
+      this.$router.push({ path: "/admin/login" });
     },
   },
 };
