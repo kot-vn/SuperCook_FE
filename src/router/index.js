@@ -37,12 +37,17 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const isAuthenticated = store.state.adminGlobal.token;
+
   if (
     to.path.includes("/admin") &&
     isAuthenticated == null &&
     to.path !== "/admin/login"
   ) {
     next({ path: "/admin/login" });
+  } else next();
+
+  if (to.path.includes("/admin/login") && isAuthenticated != null) {
+    next({ path: "/admin" });
   } else next();
 });
 

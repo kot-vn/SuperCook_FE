@@ -91,7 +91,9 @@ export default {
       passwordBlurred: "passwordBlurred",
     }),
   },
-  mounted() {},
+  mounted() {
+    window.document.body.style.paddingLeft = 0;
+  },
   watch: {
     timer: {
       handler(value) {
