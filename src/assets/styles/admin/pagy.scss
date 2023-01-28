@@ -1,0 +1,42 @@
+.pagi-center {
+  .pagination-wrapper {
+    display: inline-block;
+    div {
+      color: black;
+      float: left;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      border: 1px solid var(--background-pink);
+      color: var(--background-pink);
+      transition: 0.2s all ease-in-out;
+      cursor: pointer;
+      &:hover:not(.active) {
+        background-color: var(--background-pink);
+        color: white;
+      }
+      &:first-child {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+      &:last-child {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+    }
+    p {
+      margin: 0;
+    }
+    .active {
+      background-color: var(--background-pink);
+      color: white;
+      border: 1px solid var(--background-pink);
+      p {
+        color: white;
+      }
+    }
+  }
+}
