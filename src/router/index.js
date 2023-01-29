@@ -5,6 +5,8 @@ import Client from "../views/Client.vue";
 import Admin from "../views/Admin.vue";
 import AdminLogin from "../components/admin/AdminLogin.vue";
 import ControlPanel from "../components/admin/ControlPanel.vue";
+import Dashboard from "../components/admin/Dashboard.vue";
+import IngredientCategories from "../components/admin/IngredientCategories.vue";
 
 Vue.use(VueRouter);
 
@@ -24,6 +26,16 @@ const routes = [
       {
         path: "",
         component: ControlPanel,
+        children: [
+          {
+            path: "",
+            component: Dashboard,
+          },
+          {
+            path: "ingredient-categories",
+            component: IngredientCategories,
+          },
+        ],
       },
     ],
   },

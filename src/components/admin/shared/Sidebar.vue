@@ -31,7 +31,7 @@
           <span v-for="(menuItem, index) in menuItems" :key="index">
             <li class="position-relative list-unstyled">
               <router-link
-                :to="{ path: menuItem.link }"
+                :to="{ path: '/admin/' + menuItem.link }"
                 tag="a"
                 class="d-flex align-items-center text-decoration-none"
               >
@@ -103,19 +103,19 @@ export default {
           icon: "bxs-dashboard",
         },
         {
-          link: "#",
+          link: "ingredient-categories",
           name: "Ingredient Categories",
           tooltip: "Ingredient Categories",
           icon: "bx-category-alt",
         },
         {
-          link: "#",
+          link: "ingredients",
           name: "Ingredients",
           tooltip: "Ingredients",
           icon: "bx-food-menu",
         },
         {
-          link: "#",
+          link: "recipes",
           name: "Recipes",
           tooltip: "Recipes",
           icon: "bx-book-content",

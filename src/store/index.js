@@ -3,6 +3,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 import adminGlobal from "./modules/admin/global";
+import pagy from "./modules/admin/pagy";
+import ingredientCategories from "./modules/admin/ingredientCategories";
 import client from "./modules/client";
 
 const dataState = createPersistedState({
@@ -30,6 +32,6 @@ export default new Vuex.Store({
       commit(SET_LOADING);
     },
   },
-  modules: { adminGlobal, client },
+  modules: { adminGlobal, client, pagy, ingredientCategories },
   plugins: [dataState],
 });

@@ -11,7 +11,7 @@ export default {
   strict: true,
   state: {
     pages: {
-      page: 1,
+      page: 0,
       pages: 1,
     },
     currentPage: 1,
@@ -25,7 +25,8 @@ export default {
       state.currentPage = 1;
     },
     SET_PAGE(state, newPage) {
-      state.pages = newPage;
+      state.pages.page = newPage.page;
+      state.pages.pages = newPage.pages;
     },
     CHANGE_PAGE(state, newPage) {
       state.currentPage = newPage;
