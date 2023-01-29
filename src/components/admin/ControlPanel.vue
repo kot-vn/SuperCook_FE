@@ -1,7 +1,11 @@
 <template>
   <div>
-    <aside><Sidebar></Sidebar></aside>
-    <div><h1>control panel</h1></div>
+    <aside>
+      <Sidebar></Sidebar>
+    </aside>
+    <section class="admin-main p-4">
+      <router-view></router-view>
+    </section>
   </div>
 </template>
 

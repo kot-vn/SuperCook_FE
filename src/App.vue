@@ -2,6 +2,7 @@
   <div id="app">
     <router-view></router-view>
     <Loader v-if="showLoading"></Loader>
+    <vue-confirm-dialog></vue-confirm-dialog>
   </div>
 </template>
 

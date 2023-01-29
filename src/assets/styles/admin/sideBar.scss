@@ -8,7 +8,7 @@
   height: 100%;
   min-height: min-content;
   width: 78px;
-  background: #11101d;
+  background: #2a3042;
   z-index: 99;
   transition: all 0.5s ease;
   i {
@@ -96,13 +96,11 @@
             width: 100%;
             border-radius: 12px;
             transition: all 0.4s ease;
-            background: #11101d;
             &:hover {
-              background: white;
+              background: var(--background-pink);
               .links_name,
               i {
                 transition: all 0.5s ease;
-                color: #11101d;
               }
             }
             .links_name {
