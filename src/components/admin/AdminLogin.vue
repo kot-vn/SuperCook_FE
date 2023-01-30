@@ -100,7 +100,6 @@ export default {
         if (value > 0) {
           setTimeout(() => {
             this.timer--;
-            console.log("run?");
           }, 1000);
         }
       },

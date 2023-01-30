@@ -7,6 +7,7 @@ import AdminLogin from "../components/admin/AdminLogin.vue";
 import ControlPanel from "../components/admin/ControlPanel.vue";
 import Dashboard from "../components/admin/Dashboard.vue";
 import IngredientCategories from "../components/admin/IngredientCategories.vue";
+import Ingredients from "../components/admin/Ingredients.vue";
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,10 @@ const routes = [
           {
             path: "ingredient-categories",
             component: IngredientCategories,
+          },
+          {
+            path: "ingredients",
+            component: Ingredients,
           },
         ],
       },

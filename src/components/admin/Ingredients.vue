@@ -3,7 +3,7 @@
     <div
       class="admin-card-header d-flex justify-content-between align-items-center mb-4"
     >
-      <h4 class="m-0">Ingredient Categories</h4>
+      <h4 class="m-0">Ingredients</h4>
       <b-button variant="success" pill @click="showModal('add')">
         <i class="fa-solid fa-plus"></i>
         New
@@ -28,18 +28,15 @@
         <b-table
           hover
           :fields="fields"
-          :items="ingredientCategories"
-          v-if="ingredientCategories.length > 0"
+          :items="ingredients"
+          v-if="ingredients.length > 0"
         >
-          <template #cell(icon)="ingredientCategory">
-            <img class="item-icon" :src="ingredientCategory.item.icon" alt="" />
-          </template>
-          <template #cell(actions)="ingredientCategory">
+          <template #cell(actions)="ingredient">
             <b-button
               size="sm"
               variant="link"
               title="Edit"
-              @click="showModal(ingredientCategory.item.id)"
+              @click="showModal(ingredient.item.id)"
             >
               <i
                 v-b-tooltip.hover
@@ -51,8 +48,7 @@
               variant="link"
               size="sm"
               title="Delete"
-              v-if="ingredientCategory.item.total == 0"
-              @click="deleteItem(ingredientCategory.item)"
+              @click="deleteItem(ingredient.item)"
             >
               <i
                 v-b-tooltip.hover
@@ -65,7 +61,7 @@
         <center v-else>
           <div class="text-danger p-3 mb-2">No data</div>
         </center>
-        <Pagy @fetchNewData="fetchIngredientCategories"></Pagy>
+        <Pagy @fetchNewData="fetchIngredients"></Pagy>
       </div>
     </b-card>
     <b-modal
@@ -81,46 +77,35 @@
           label="Name"
           label-for="name-input"
           invalid-feedback="Name is required"
-          :state="categoryName.length != 0"
+          :state="name != null && name != ''"
         >
           <b-form-input
             id="name-input"
-            v-model="categoryName"
-            :state="categoryName.length != 0"
+            v-model="name"
+            :state="name != null && name != ''"
             required
           ></b-form-input>
         </b-form-group>
         <b-form-group
-          label="Icon"
-          label-for="icon-input"
-          invalid-feedback="Icon is required"
-          :state="Boolean(newIcon) || icon != null"
+          label="Category"
+          label-for="category-input"
+          invalid-feedback="Category is required"
+          :state="ingredientCategoryId != null"
         >
-          <b-form-file
-            v-model="newIcon"
-            id="icon-input"
-            :state="Boolean(newIcon) || icon != null"
-            placeholder="Choose a file or drop it here..."
-            accept=".jpg, .png, .jpeg"
-            drop-placeholder="Drop file here..."
+          <multiselect
+            v-model="ingredientCategoryId"
+            :options="ingredientCategories"
+            :close-on-select="false"
+            :clear-on-select="false"
+            :preserve-search="true"
+            placeholder="Select category..."
+            label="categoryName"
+            track-by="categoryName"
+            :options-limit="300"
             required
-          ></b-form-file>
+          >
+          </multiselect>
         </b-form-group>
-        <b-form-group
-          label="Icon URL"
-          label-for="icon-url-input"
-          invalid-feedback="Name is required"
-          :state="categoryName.length != 0"
-          v-if="title == 'Edit' && newIcon == null"
-        >
-          <b-form-input
-            id="icon-url-input"
-            v-model="icon"
-            :state="icon != null"
-            required
-          ></b-form-input>
-        </b-form-group>
-        <img class="w-100" v-if="icon && newIcon == null" :src="icon" alt="" />
       </form>
     </b-modal>
   </div>
@@ -130,11 +115,12 @@
 import Pagy from "./shared/Pagy.vue";
 import { createNamespacedHelpers } from "vuex";
 import { mapFields } from "vuex-map-fields";
+import Multiselect from "vue-multiselect";
 
-const { mapActions, mapState, mapMutations } = createNamespacedHelpers(
-  "ingredientCategories"
-);
+const { mapActions, mapState, mapMutations } =
+  createNamespacedHelpers("ingredients");
 const pagyMaper = createNamespacedHelpers("pagy");
+const adminGlobalMaper = createNamespacedHelpers("adminGlobal");
 
 export default {
   data() {
@@ -148,17 +134,14 @@ export default {
           sortable: true,
         },
         {
-          key: "icon",
-          label: "Icon",
-        },
-        {
-          key: "categoryName",
-          label: "Category name",
+          key: "name",
+          label: "Name",
           sortable: true,
         },
         {
-          key: "total",
-          label: "Ingredients number",
+          key: "ingredientCategoryDto.categoryName",
+          label: "Category name",
+          sortable: true,
         },
         {
           key: "actions",
@@ -167,36 +150,40 @@ export default {
       ],
     };
   },
+  components: { Pagy, Multiselect },
   computed: {
-    ...mapState(["ingredientCategories"]),
-    ...mapFields("ingredientCategories", {
+    ...adminGlobalMaper.mapState(["errorMsg"]),
+    ...mapState(["ingredients"]),
+    ...mapFields("ingredients", {
+      ingredientCategories: "ingredientCategories",
       searchValue: "searchValue",
-      categoryName: "ingredientCategory.categoryName",
-      newIcon: "ingredientCategory.newIcon",
-      icon: "ingredientCategory.icon",
+      name: "ingredient.name",
+      ingredientCategoryId: "ingredient.ingredientCategoryId",
     }),
   },
   mounted() {
     this.RESET_PAGE();
+    this.fetchIngredients();
     this.fetchIngredientCategories();
   },
   methods: {
-    ...mapMutations(["RESET_INGREDIENT_CATEGORY"]),
+    ...mapMutations(["RESET_INGREDIENT"]),
     ...mapActions([
+      "fetchIngredients",
       "fetchIngredientCategories",
-      "deleteIngredientCategories",
-      "addIngredientCategory",
-      "getIngredientCategory",
-      "updateIngredientCategory",
+      "deleteIngredient",
+      "addIngredient",
+      "getIngredient",
+      "updateIngredient",
     ]),
     ...pagyMaper.mapMutations(["RESET_PAGE"]),
     async fetchData() {
       await this.RESET_PAGE();
-      this.fetchIngredientCategories();
+      this.fetchIngredients();
     },
     async deleteItem(item) {
       this.$confirm({
-        message: "Do you want to delete this ingredient category?",
+        message: "Do you want to delete this ingredient?",
         button: {
           no: "Cancel",
           yes: "Delete",
@@ -204,8 +191,8 @@ export default {
         callback: async (confirm) => {
           if (confirm) {
             try {
-              await this.deleteIngredientCategories(item.id);
-              this.fetchIngredientCategories();
+              await this.deleteIngredient(item.id);
+              this.fetchIngredients();
             } catch (e) {
               console.log(e);
             }
@@ -217,19 +204,15 @@ export default {
       this.id = param;
       if (param == "add") {
         this.title = "Add new";
-        this.RESET_INGREDIENT_CATEGORY();
+        this.RESET_INGREDIENT();
       } else {
         this.title = "Edit";
-        this.newIcon = null;
-        this.getIngredientCategory(param);
+        this.getIngredient(param);
       }
       this.$refs["modal"].show();
     },
     checkFormValidity() {
-      if (
-        (this.newIcon && this.categoryName.length != 0) ||
-        (this.categoryName.length != 0 && this.icon != null)
-      ) {
+      if (this.name != null && this.ingredientCategoryId != null) {
         return true;
       } else {
         return false;
@@ -239,19 +222,24 @@ export default {
       bvModalEvent.preventDefault();
       if (this.checkFormValidity()) {
         if (this.title == "Add new") {
-          await this.addIngredientCategory();
-          this.fetchData();
+          await this.addIngredient();
+          if (this.errorMsg == null) {
+            this.fetchData();
+          }
         } else {
-          await this.updateIngredientCategory(this.id);
-          this.fetchIngredientCategories();
+          await this.updateIngredient(this.id);
+          if (this.errorMsg == null) {
+            this.fetchIngredients();
+          }
         }
-        this.$nextTick(() => {
-          this.$bvModal.hide("modal-prevent-closing");
-        });
+        if (this.errorMsg == null) {
+          this.$nextTick(() => {
+            this.$bvModal.hide("modal-prevent-closing");
+          });
+        }
       } else return;
     },
   },
-  components: { Pagy },
 };
 </script>
 
