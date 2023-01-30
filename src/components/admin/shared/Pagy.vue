@@ -61,15 +61,15 @@ export default {
     ...pagingStore.mapMutations(["PRE_PAGE", "NEXT_PAGE", "CHANGE_PAGE"]),
     goToPrePage() {
       this.PRE_PAGE();
-      this.$emit("fetchNewDatas");
+      this.$emit("fetchNewData");
     },
     goToNextPageFunc() {
       this.NEXT_PAGE();
-      this.$emit("fetchNewDatas");
+      this.$emit("fetchNewData");
     },
     changePageFunc(newPage) {
       this.CHANGE_PAGE(newPage);
-      this.$emit("fetchNewDatas");
+      this.$emit("fetchNewData");
     },
   },
 };

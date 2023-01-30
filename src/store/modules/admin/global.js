@@ -4,6 +4,7 @@ import axios from "@/plugins/axios";
 const CLEAR_TOKEN = "CLEAR_TOKEN";
 const SET_TOKEN = "SET_TOKEN";
 const SET_ERROR = "SET_ERROR";
+const RESET_ERROR = "RESET_ERROR";
 
 export default {
   namespaced: true,
@@ -42,14 +43,20 @@ export default {
         })
         .catch((e) => {
           console.log(e);
-          commit(SET_ERROR, "Something wrong, please try again later!");
         });
+    },
+    async callAlert({ commit, state }, payload) {
+      await commit(SET_ERROR, payload);
+      alert(state.errorMsg);
     },
   },
   mutations: {
     updateField,
     SET_ERROR(state, payload) {
       state.errorMsg = payload;
+    },
+    RESET_ERROR(state) {
+      state.errorMsg = null;
     },
     SET_TOKEN(state, payload) {
       state.token = payload;
