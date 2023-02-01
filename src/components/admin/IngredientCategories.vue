@@ -109,14 +109,14 @@
         <b-form-group
           label="Icon URL"
           label-for="icon-url-input"
-          invalid-feedback="Name is required"
-          :state="categoryName.length != 0"
+          invalid-feedback="Icon is required"
+          :state="icon ? icon.length != 0 : false"
           v-if="title == 'Edit' && newIcon == null"
         >
           <b-form-input
             id="icon-url-input"
             v-model="icon"
-            :state="icon != null"
+            :state="icon ? icon.length != 0 : false"
             required
           ></b-form-input>
         </b-form-group>
@@ -228,7 +228,7 @@ export default {
     checkFormValidity() {
       if (
         (this.newIcon && this.categoryName.length != 0) ||
-        (this.categoryName.length != 0 && this.icon != null)
+        (this.categoryName.length != 0 && this.icon.length != 0)
       ) {
         return true;
       } else {

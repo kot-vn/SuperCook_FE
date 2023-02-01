@@ -78,15 +78,21 @@ export default {
           });
         });
     },
-    async deleteIngredient({ commit, state }, id) {
+    async deleteIngredient({ commit, state, dispatch }, id) {
       const query = {
         method: "DELETE",
         url: `ingredient/delete/${id}`,
       };
       await axios(query)
         .then((res) => {
-          if (state.ingredients.length === 1) {
-            commit("pagy/RESET_PAGE", null, { root: true });
+          if (res.data.code == 0) {
+            if (state.ingredients.length === 1) {
+              commit("pagy/RESET_PAGE", null, { root: true });
+            }
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
           }
         })
         .catch((e) => {
