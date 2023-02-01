@@ -98,10 +98,10 @@
             :close-on-select="false"
             :clear-on-select="false"
             :preserve-search="true"
+            :multiple="false"
             placeholder="Select category..."
             label="categoryName"
             track-by="categoryName"
-            :options-limit="300"
             required
           >
           </multiselect>
