@@ -5,20 +5,39 @@
       <SharedSidebar></SharedSidebar>
     </aside>
     <main class="main">
-      <div class="main-search-result pl-2 overflow-auto">
-        <h2 class="py-4">You can make 30 recipes</h2>
+      <div
+        v-if="recipes && recipes != [] && ingredientSearchValue.length != 0"
+        class="main-search-result pl-2 overflow-auto"
+      >
+        <h2 class="py-4">You can make {{ recipes.length }} recipes</h2>
         <div class="recipe-list">
           <div
-            v-for="(item, index) in 30"
+            v-for="(recipe, index) in recipes"
             :key="index"
             class="w-50 recipe-item px-2 d-inline-block"
           >
-            <RecipeItem></RecipeItem>
+            <div @click="setRecipe(recipe)">
+              <RecipeItem
+                v-b-toggle.recipeSidebar
+                :recipe="recipe"
+              ></RecipeItem>
+            </div>
           </div>
         </div>
       </div>
+      <div v-else>
+        <div class="empty-state-content mt-4">
+          <img
+            src="https://www.supercook.com/statics/images/empty-state-icon.png"
+            alt=""
+            class="empty-state-icon"
+          />
+          <h4 class="title">Add your ingredients to get started</h4>
+          <h4>Every ingredient you add unlocks more recipes</h4>
+        </div>
+      </div>
       <aside>
-        <RecipeSidebar></RecipeSidebar>
+        <RecipeSidebar :recipe="recipeData"></RecipeSidebar>
       </aside>
     </main>
   </div>
@@ -31,7 +50,7 @@ import RecipeSidebar from "@/components/client/RecipeSidebar.vue";
 import SharedHeader from "@/components/client/shared/SharedHeader.vue";
 import SharedSidebar from "@/components/client/shared/SharedSidebar.vue";
 
-const { mapActions } = createNamespacedHelpers("client");
+const { mapActions, mapState } = createNamespacedHelpers("client");
 
 export default {
   components: {
@@ -40,11 +59,24 @@ export default {
     SharedSidebar,
     RecipeSidebar,
   },
+  data() {
+    return {
+      recipeData: {},
+    };
+  },
+  computed: {
+    ...mapState(["recipes", "ingredientSearchValue"]),
+  },
   mounted() {
     this.fetchIngredientCategories();
     this.fetchIngredients();
   },
-  methods: { ...mapActions(["fetchIngredientCategories", "fetchIngredients"]) },
+  methods: {
+    ...mapActions(["fetchIngredientCategories", "fetchIngredients"]),
+    setRecipe(payload) {
+      this.recipeData = payload;
+    },
+  },
 };
 </script>
 

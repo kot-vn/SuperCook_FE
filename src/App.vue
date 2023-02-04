@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="master">
     <router-view></router-view>
     <Loader v-if="showLoading"></Loader>
     <vue-confirm-dialog></vue-confirm-dialog>
