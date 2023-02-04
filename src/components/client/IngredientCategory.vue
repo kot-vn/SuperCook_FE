@@ -39,7 +39,7 @@
               :key="ingredient.id"
               class="ingredient-item d-inline-block rounded text-decoration-none"
               :class="{ active: isActive(ingredient.id) }"
-              @click="setIngredient(ingredient)"
+              @click="searchRecipes(ingredient)"
             >
               {{ ingredient.name }}
             </span>
@@ -53,6 +53,9 @@
 <script>
 import { mapFields } from "vuex-map-fields";
 import _ from "lodash";
+import { createNamespacedHelpers } from "vuex";
+
+const { mapActions } = createNamespacedHelpers("client");
 
 export default {
   props: {
@@ -67,10 +70,15 @@ export default {
     }),
   },
   methods: {
+    ...mapActions(["fetchRecipes"]),
     isActive(id) {
       return this.ingredientSearchValue.find((x) =>
         x.id === id ? true : false
       );
+    },
+    searchRecipes(payload) {
+      this.setIngredient(payload);
+      this.fetchRecipes();
     },
     setIngredient(payload) {
       this.isActive(payload.id)

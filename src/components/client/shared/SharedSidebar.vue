@@ -30,12 +30,10 @@
           label="name"
           track-by="name"
           :options-limit="300"
+          @input="onChange"
         >
           <template slot="selection" slot-scope="{ values, search, isOpen }">
-            <span
-              class="multiselect__single"
-              v-if="values.length &amp;&amp; !isOpen"
-            >
+            <span class="multiselect__single" v-if="values.length && !isOpen">
               {{ values.length }} options selected
             </span>
           </template>
@@ -56,7 +54,7 @@ import { mapFields } from "vuex-map-fields";
 import IngredientCategory from "@/components/client/IngredientCategory.vue";
 import Multiselect from "vue-multiselect";
 
-const { mapState } = createNamespacedHelpers("client");
+const { mapState, mapActions } = createNamespacedHelpers("client");
 
 export default {
   data() {
@@ -80,6 +78,7 @@ export default {
     this.showSidebar();
   },
   methods: {
+    ...mapActions(["fetchRecipes"]),
     showSidebar() {
       const screenWidth = screen.width;
       if (screenWidth <= 900) {
@@ -87,6 +86,9 @@ export default {
         this.showBackdrop = true;
         this.sidebarBG = "white";
       }
+    },
+    onChange() {
+      this.fetchRecipes();
     },
   },
 };

@@ -138,4 +138,26 @@
       }
     }
   }
+  .empty-state-content {
+    text-align: center;
+    .empty-state-icon {
+      width: 80px;
+      height: 80px;
+    }
+    .title {
+      padding-bottom: 15px;
+      padding-top: 15px;
+    }
+  }
+}
+.master {
+  background-image: linear-gradient(
+      180deg,
+      hsla(0, 0%, 100%, 0.7),
+      hsla(0, 0%, 100%, 0.7)
+    ),
+    url("https://www.supercook.com/statics/images/onboarding-bg.svg");
+  background-position: 0px 0px, 50% 0%;
+  background-size: auto, auto;
+  height: 100vh;
 }

@@ -1,12 +1,29 @@
 <template>
-  <div class="shadow">
+  <div v-if="recipe" class="shadow">
     <b-card
-      img-src="	https://i2.supercook.com/8/b/5/7/8b576073d547a2265f59ef7e6467990c-t.jpg"
+      :img-src="recipe.image"
       img-height="100px"
+      img-width="150px"
       img-left
       class="mb-3"
     >
-      <b-card-text> Caramelized Onions </b-card-text>
+      <b-card-text> {{ recipe.title }} </b-card-text>
     </b-card>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    recipe: {
+      type: Object,
+      default: () => {},
+    },
+  },
+  data() {
+    return {};
+  },
+  computed: {},
+  mounted() {},
+  methods: {},
+};
+</script>

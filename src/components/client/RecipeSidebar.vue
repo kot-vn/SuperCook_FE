@@ -17,37 +17,44 @@
           >
             <span class="fa-solid fa-xmark"></span>
           </div>
-          <img
-            class="w-100 h-100"
-            src="https://i2.supercook.com/8/1/d/1/81d1b3d9387a8747c12138ca08193f2c-0.jpg"
-            alt=""
-          />
+          <img class="w-100 h-100" :src="recipe.image" alt="" />
         </section>
         <section class="recipe-detail-body px-4 w-100">
           <div
             class="shadow p-3 bg-white overflow-hidden font-weight-bold rounded position-relative recipe-title"
           >
-            Instant Pot Perfect Hard Boiled Eggs
+            {{ recipe.title }}
           </div>
           <div class="recipe-ingredients">
             <div>
-              <b-table
-                responsive
-                borderless
-                show-empty
-                striped
-                hover
-                :items="ingredient"
-              ></b-table>
+              <b-card class="mb-4">
+                <b-table
+                  responsive
+                  show-empty
+                  hover
+                  :fields="fields"
+                  :items="content"
+                ></b-table>
+              </b-card>
             </div>
           </div>
         </section>
-        <section class="more-recipe px-4 w-100">
+        <section class="more-recipe px-4 w-100" v-if="recipes">
           <p class="font-weight-bold">You might also like</p>
-          <RecipeItem
-            v-for="(recipeItem, index) in 10"
-            :key="index"
-          ></RecipeItem>
+          <div v-if="recipesData.slice(1, 6).length > 0">
+            <template v-for="(recipeItem, index) in recipesData.slice(1, 6)">
+              <div @click="setRecipe(recipeItem)">
+                <RecipeItem
+                  class="pointer"
+                  :key="index"
+                  :recipe="recipeItem"
+                ></RecipeItem>
+              </div>
+            </template>
+          </div>
+          <div v-else>
+            <b-table striped show-empty></b-table>
+          </div>
         </section>
       </div>
     </b-sidebar>
@@ -56,17 +63,54 @@
 
 <script>
 import RecipeItem from "./RecipeItem.vue";
+import { createNamespacedHelpers } from "vuex";
+import _ from "lodash";
+
+const { mapState } = createNamespacedHelpers("client");
 
 export default {
   components: { RecipeItem },
+  props: {
+    recipe: {
+      type: Object,
+      default: {},
+    },
+  },
   data() {
     return {
-      ingredient: [
-        { id: 1, name: "5 large onions" },
-        { id: 2, name: "3 tablespoons olive oil or melted butter" },
-        { id: 3, name: "1/2 teaspoon salt" },
-      ],
+      fields: [{ key: "line", label: "Ingredients" }],
     };
+  },
+  computed: {
+    ...mapState(["recipes"]),
+    recipesData() {
+      return _.cloneDeep(this.recipes);
+    },
+    recipeClone() {
+      return _.cloneDeep(this.recipe);
+    },
+    content() {
+      if (this.recipe.content) {
+        const string = this.recipe.content.slice(1, -1);
+        return JSON.parse("[" + string + "]");
+      }
+    },
+  },
+  methods: {
+    setRecipe(payload) {
+      this.recipe = payload;
+    },
   },
 };
 </script>
+<style lang="scss" scoped>
+.card-body {
+  padding: 0;
+  .table-responsive {
+    margin: 0;
+  }
+}
+.pointer {
+  cursor: pointer;
+}
+</style>
