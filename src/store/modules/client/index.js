@@ -16,6 +16,7 @@ export default {
     ingredients: [],
     ingredientSearchValue: [],
     recipes: null,
+    searchValue: "",
   },
   getters: {
     getField,
@@ -34,6 +35,32 @@ export default {
           console.log(err);
         });
     },
+    async fetchRecipesByName({ commit, state, dispatch }) {
+      const query = {
+        method: "GET",
+        url: `recipe/search?keyword=${state.searchValue}&page=${
+          pagy.state.currentPage - 1
+        }`,
+      };
+      await axios(query)
+        .then((res) => {
+          commit(SET_RECIPES, res.data.data.content);
+          commit(
+            "pagy/SET_PAGE",
+            {
+              page: res.data.data.number + 1,
+              pages: res.data.data.totalPages,
+              totalElements: res.data.data.totalElements,
+            },
+            { root: true }
+          );
+        })
+        .catch((err) => {
+          dispatch("adminGlobal/callAlert", e, {
+            root: true,
+          });
+        });
+    },
     async fetchRecipes({ commit, state, dispatch }) {
       const ingredients = state.ingredientSearchValue.map((a) => a.id);
       await axios
@@ -47,6 +74,7 @@ export default {
             {
               page: res.data.data.number + 1,
               pages: res.data.data.totalPages,
+              totalElements: res.data.data.totalElements,
             },
             { root: true }
           );

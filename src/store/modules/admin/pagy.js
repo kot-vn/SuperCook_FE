@@ -1,6 +1,5 @@
 import { getField, updateField } from "vuex-map-fields";
 
-const RESET_CURRENT_PAGE = "RESET_CURRENT_PAGE";
 const SET_PAGE = "SET_PAGE";
 const CHANGE_PAGE = "CHANGE_PAGE";
 const RESET_PAGE = "RESET_PAGE";
@@ -13,6 +12,7 @@ export default {
     pages: {
       page: 0,
       pages: 1,
+      totalElements: 0,
     },
     currentPage: 1,
   },
@@ -21,12 +21,10 @@ export default {
   },
   mutations: {
     updateField,
-    RESET_CURRENT_PAGE(state) {
-      state.currentPage = 1;
-    },
     SET_PAGE(state, newPage) {
       state.pages.page = newPage.page;
       state.pages.pages = newPage.pages;
+      state.pages.totalElements = newPage.totalElements;
     },
     CHANGE_PAGE(state, newPage) {
       state.currentPage = newPage;

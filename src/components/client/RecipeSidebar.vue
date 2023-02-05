@@ -41,9 +41,12 @@
         </section>
         <section class="more-recipe px-4 w-100" v-if="recipes">
           <p class="font-weight-bold">You might also like</p>
-          <div v-if="recipesData.slice(1, 6).length > 0">
-            <template v-for="(recipeItem, index) in recipesData.slice(1, 6)">
-              <div @click="setRecipe(recipeItem)">
+          <div v-if="getSuggestRecipes.length > 1">
+            <template v-for="(recipeItem, index) in getSuggestRecipes">
+              <div
+                v-if="recipe.id != recipeItem.id"
+                @click="setRecipe(recipeItem)"
+              >
                 <RecipeItem
                   class="pointer"
                   :key="index"
@@ -88,6 +91,11 @@ export default {
     },
     recipeClone() {
       return _.cloneDeep(this.recipe);
+    },
+    getSuggestRecipes() {
+      const random = this.recipesData.sort(() => 0.5 - Math.random());
+      const result = random.slice(0, 5);
+      return result;
     },
     content() {
       if (this.recipe.content) {
