@@ -7,7 +7,7 @@
     width="450px"
     :visible="visible"
   >
-    <div class="sidebar-wrapper pl-4 py-4 pr-2">
+    <div class="sidebar-wrapper px-4 py-4">
       <div class="brand-name pb-4">
         <h1 class="mx-auto text-white">Pantry</h1>
       </div>
@@ -40,7 +40,7 @@
         </multiselect>
       </div>
     </div>
-    <div class="sidebar-body overflow-auto py-4 pl-4 pr-2">
+    <div class="sidebar-body overflow-auto py-4 px-4">
       <IngredientCategory
         :ingredient-categories="ingredientCategories"
       ></IngredientCategory>
