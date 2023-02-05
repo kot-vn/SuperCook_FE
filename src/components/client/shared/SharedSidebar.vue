@@ -6,6 +6,7 @@
     :backdrop="showBackdrop"
     width="450px"
     :visible="visible"
+    no-close-on-esc
   >
     <div class="sidebar-wrapper px-4 py-4">
       <div class="brand-name pb-4">
@@ -29,7 +30,6 @@
           placeholder="Add/remove ingredients..."
           label="name"
           track-by="name"
-          :options-limit="300"
           @input="onChange"
         >
           <template slot="selection" slot-scope="{ values, search, isOpen }">
