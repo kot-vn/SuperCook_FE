@@ -54,6 +54,7 @@ import { mapFields } from "vuex-map-fields";
 import IngredientCategory from "@/components/client/IngredientCategory.vue";
 import Multiselect from "vue-multiselect";
 
+const pagyMaper = createNamespacedHelpers("pagy");
 const { mapState, mapActions } = createNamespacedHelpers("client");
 
 export default {
@@ -71,6 +72,7 @@ export default {
   computed: {
     ...mapFields("client", {
       ingredientSearchValue: "ingredientSearchValue",
+      searchValue: "searchValue",
     }),
     ...mapState(["ingredientCategories", "ingredients"]),
   },
@@ -78,6 +80,7 @@ export default {
     this.showSidebar();
   },
   methods: {
+    ...pagyMaper.mapMutations(["RESET_PAGE"]),
     ...mapActions(["fetchRecipes"]),
     showSidebar() {
       const screenWidth = screen.width;
@@ -87,7 +90,9 @@ export default {
         this.sidebarBG = "white";
       }
     },
-    onChange() {
+    async onChange() {
+      await this.RESET_PAGE();
+      this.searchValue = "";
       this.fetchRecipes();
     },
   },

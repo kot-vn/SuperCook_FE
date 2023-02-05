@@ -14,8 +14,9 @@
         <b-form-input
           v-model="searchValue"
           class="pl-5"
-          type="search"
+          type="text"
           placeholder="Find..."
+          @input="searchRecipes"
         >
         </b-form-input>
         <span class="fa-solid fa-magnifying-glass position-absolute"></span>
@@ -25,9 +26,30 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from "vuex";
+import { mapFields } from "vuex-map-fields";
+
+const { mapActions } = createNamespacedHelpers("client");
+const pagyMaper = createNamespacedHelpers("pagy");
+
 export default {
-  data() {
-    return { searchValue: null };
+  computed: {
+    ...mapFields("client", {
+      searchValue: "searchValue",
+      ingredientSearchValue: "ingredientSearchValue",
+    }),
+  },
+  mounted() {
+    this.RESET_PAGE();
+  },
+  methods: {
+    ...mapActions(["fetchRecipesByName"]),
+    ...pagyMaper.mapMutations(["RESET_PAGE"]),
+    async searchRecipes() {
+      await this.RESET_PAGE();
+      this.ingredientSearchValue = [];
+      this.fetchRecipesByName();
+    },
   },
 };
 </script>

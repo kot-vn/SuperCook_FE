@@ -56,6 +56,7 @@ import _ from "lodash";
 import { createNamespacedHelpers } from "vuex";
 
 const { mapActions } = createNamespacedHelpers("client");
+const pagyMaper = createNamespacedHelpers("pagy");
 
 export default {
   props: {
@@ -67,16 +68,20 @@ export default {
   computed: {
     ...mapFields("client", {
       ingredientSearchValue: "ingredientSearchValue",
+      searchValue: "searchValue",
     }),
   },
   methods: {
+    ...pagyMaper.mapMutations(["RESET_PAGE"]),
     ...mapActions(["fetchRecipes"]),
     isActive(id) {
       return this.ingredientSearchValue.find((x) =>
         x.id === id ? true : false
       );
     },
-    searchRecipes(payload) {
+    async searchRecipes(payload) {
+      await this.RESET_PAGE();
+      this.searchValue = "";
       this.setIngredient(payload);
       this.fetchRecipes();
     },
