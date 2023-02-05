@@ -27,3 +27,9 @@ export default {
   methods: {},
 };
 </script>
+<style lang="scss" scoped>
+.card-body {
+  max-height: 100px;
+  overflow: auto;
+}
+</style>

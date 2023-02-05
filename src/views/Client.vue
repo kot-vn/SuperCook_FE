@@ -12,7 +12,9 @@
         "
         class="main-search-result pl-2 overflow-auto"
       >
-        <h2 class="py-4">You can make {{ pages.totalElements }} recipes</h2>
+        <h3 class="py-4 px-2">
+          You can make {{ pages.totalElements }} recipes
+        </h3>
         <div class="recipe-list">
           <div
             v-for="(recipe, index) in recipes"
