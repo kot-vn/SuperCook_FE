@@ -129,7 +129,11 @@
           label="Ingredient(s)"
           label-for="ingredients-input"
           invalid-feedback="Ingredient(s) is required"
-          :state="ingredientDtoList != null"
+          :state="
+            ingredientDtoList != null &&
+            ingredientDtoList != [] &&
+            ingredientDtoList.length != 0
+          "
         >
           <multiselect
             v-model="ingredientDtoList"
@@ -266,6 +270,8 @@ export default {
         (this.name != null &&
           this.name != "" &&
           Boolean(this.newImage) &&
+          this.ingredientDtoList != [] &&
+          this.ingredientDtoList.length != 0 &&
           this.ingredientDtoList != null &&
           this.content != null &&
           this.content != "") ||
@@ -273,6 +279,8 @@ export default {
           this.name != "" &&
           this.image.length != 0 &&
           this.ingredientDtoList != null &&
+          this.ingredientDtoList != [] &&
+          this.ingredientDtoList.length != 0 &&
           this.content != null &&
           this.content != "")
       ) {
