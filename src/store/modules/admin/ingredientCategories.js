@@ -107,7 +107,7 @@ export default {
             "Content-Type": "multipart/form-data",
           },
         })
-        .then(() => {
+        .then((res) => {
           if (res.data.code === 0) {
             commit(RESET_INGREDIENT_CATEGORY);
           } else {
@@ -140,7 +140,7 @@ export default {
             "Content-Type": "multipart/form-data",
           },
         })
-        .then(() => {
+        .then((res) => {
           if (res.data.code === 0) {
             commit(RESET_INGREDIENT_CATEGORY);
           } else {

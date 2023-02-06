@@ -149,7 +149,6 @@ export default {
           ingredientCategoryId: state.ingredient.ingredientCategoryId.id,
         })
         .then((res) => {
-          console.log(res.data.code);
           if (res.data.code == 0) {
             commit(RESET_INGREDIENT);
             commit("adminGlobal/RESET_ERROR", null, { root: true });

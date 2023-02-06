@@ -70,7 +70,7 @@ export default {
           }
         })
         .catch((err) => {
-          dispatch("adminGlobal/callAlert", e, {
+          dispatch("adminGlobal/callAlert", err, {
             root: true,
           });
         });
