@@ -22,17 +22,25 @@ export default {
     getField,
   },
   actions: {
-    async fetchIngredientCategories({ commit }) {
+    async fetchIngredientCategories({ commit, dispatch }) {
       const query = {
         method: "GET",
         url: "ingredient-category/getAll",
       };
       await axios(query)
         .then((res) => {
-          commit(SET_INGREDIENT_CATEGORIES, res.data.data);
+          if (res.data.code === 0) {
+            commit(SET_INGREDIENT_CATEGORIES, res.data.data);
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
+          }
         })
         .catch((err) => {
-          console.log(err);
+          dispatch("adminGlobal/callAlert", err, {
+            root: true,
+          });
         });
     },
     async fetchRecipesByName({ commit, state, dispatch }) {
@@ -44,16 +52,22 @@ export default {
       };
       await axios(query)
         .then((res) => {
-          commit(SET_RECIPES, res.data.data.content);
-          commit(
-            "pagy/SET_PAGE",
-            {
-              page: res.data.data.number + 1,
-              pages: res.data.data.totalPages,
-              totalElements: res.data.data.totalElements,
-            },
-            { root: true }
-          );
+          if (res.data.code === 0) {
+            commit(SET_RECIPES, res.data.data.content);
+            commit(
+              "pagy/SET_PAGE",
+              {
+                page: res.data.data.number + 1,
+                pages: res.data.data.totalPages,
+                totalElements: res.data.data.totalElements,
+              },
+              { root: true }
+            );
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
+          }
         })
         .catch((err) => {
           dispatch("adminGlobal/callAlert", e, {
@@ -68,16 +82,22 @@ export default {
           ingredientIdList: ingredients,
         })
         .then((res) => {
-          commit(SET_RECIPES, res.data.data.content);
-          commit(
-            "pagy/SET_PAGE",
-            {
-              page: res.data.data.number + 1,
-              pages: res.data.data.totalPages,
-              totalElements: res.data.data.totalElements,
-            },
-            { root: true }
-          );
+          if (res.data.code === 0) {
+            commit(SET_RECIPES, res.data.data.content);
+            commit(
+              "pagy/SET_PAGE",
+              {
+                page: res.data.data.number + 1,
+                pages: res.data.data.totalPages,
+                totalElements: res.data.data.totalElements,
+              },
+              { root: true }
+            );
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
+          }
         })
         .catch((e) => {
           dispatch("adminGlobal/callAlert", e, {
@@ -85,17 +105,25 @@ export default {
           });
         });
     },
-    async fetchIngredients({ commit }) {
+    async fetchIngredients({ commit, dispatch }) {
       const query = {
         method: "GET",
         url: "ingredient/getAll",
       };
       await axios(query)
         .then((res) => {
-          commit(SET_INGREDIENTS, res.data.data);
+          if (res.data.code === 0) {
+            commit(SET_INGREDIENTS, res.data.data);
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
+          }
         })
         .catch((err) => {
-          console.log(err);
+          dispatch("adminGlobal/callAlert", err, {
+            root: true,
+          });
         });
     },
   },

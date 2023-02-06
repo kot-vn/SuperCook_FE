@@ -22,7 +22,7 @@ export default {
     getField,
   },
   actions: {
-    async fetchIngredientCategories({ commit, state }) {
+    async fetchIngredientCategories({ commit, state, dispatch }) {
       const query = {
         method: "GET",
         url: `ingredient-category/search?keyword=${state.searchValue}&page=${
@@ -31,49 +31,73 @@ export default {
       };
       await axios(query)
         .then((res) => {
-          commit(SET_INGREDIENT_CATEGORIES, res.data.data.content);
-          commit(
-            "pagy/SET_PAGE",
-            {
-              page: res.data.data.number + 1,
-              pages: res.data.data.totalPages,
-            },
-            { root: true }
-          );
+          if (res.data.code === 0) {
+            commit(SET_INGREDIENT_CATEGORIES, res.data.data.content);
+            commit(
+              "pagy/SET_PAGE",
+              {
+                page: res.data.data.number + 1,
+                pages: res.data.data.totalPages,
+              },
+              { root: true }
+            );
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
+          }
         })
         .catch((e) => {
-          console.log(e);
+          dispatch("adminGlobal/callAlert", e, {
+            root: true,
+          });
         });
     },
-    async getIngredientCategory({ commit, state }, id) {
+    async getIngredientCategory({ commit, state, dispatch }, id) {
       const query = {
         method: "GET",
         url: `ingredient-category/${id}`,
       };
       await axios(query)
         .then((res) => {
-          commit(SET_INGREDIENT_CATEGORY, res.data.data);
+          if (res.data.code === 0) {
+            commit(SET_INGREDIENT_CATEGORY, res.data.data);
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
+          }
         })
         .catch((e) => {
-          console.log(e);
+          dispatch("adminGlobal/callAlert", e, {
+            root: true,
+          });
         });
     },
-    async deleteIngredientCategories({ commit, state }, id) {
+    async deleteIngredientCategories({ commit, state, dispatch }, id) {
       const query = {
         method: "DELETE",
         url: `ingredient-category/delete/${id}`,
       };
       await axios(query)
         .then((res) => {
-          if (state.ingredientCategories.length === 1) {
-            commit("pagy/RESET_PAGE", null, { root: true });
+          if (res.data.code === 0) {
+            if (state.ingredientCategories.length === 1) {
+              commit("pagy/RESET_PAGE", null, { root: true });
+            }
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
           }
         })
         .catch((e) => {
-          console.log(e);
+          dispatch("adminGlobal/callAlert", e, {
+            root: true,
+          });
         });
     },
-    async addIngredientCategory({ commit, state }) {
+    async addIngredientCategory({ commit, state, dispatch }) {
       let formData = new FormData();
       formData.append("categoryName", state.ingredientCategory.categoryName);
       formData.append("newIcon", state.ingredientCategory.newIcon);
@@ -84,13 +108,21 @@ export default {
           },
         })
         .then(() => {
-          commit(RESET_INGREDIENT_CATEGORY);
+          if (res.data.code === 0) {
+            commit(RESET_INGREDIENT_CATEGORY);
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
+          }
         })
         .catch((e) => {
-          console.log(e);
+          dispatch("adminGlobal/callAlert", e, {
+            root: true,
+          });
         });
     },
-    async updateIngredientCategory({ commit, state }, id) {
+    async updateIngredientCategory({ commit, state, dispatch }, id) {
       let formData = new FormData();
       formData.append("id", id);
       formData.append("categoryName", state.ingredientCategory.categoryName);
@@ -109,10 +141,18 @@ export default {
           },
         })
         .then(() => {
-          commit(RESET_INGREDIENT_CATEGORY);
+          if (res.data.code === 0) {
+            commit(RESET_INGREDIENT_CATEGORY);
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
+          }
         })
         .catch((e) => {
-          console.log(e);
+          dispatch("adminGlobal/callAlert", e, {
+            root: true,
+          });
         });
     },
   },

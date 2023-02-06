@@ -31,10 +31,6 @@ const routes = [
         children: [
           {
             path: "",
-            component: Dashboard,
-          },
-          {
-            path: "ingredient-categories",
             component: IngredientCategories,
           },
           {

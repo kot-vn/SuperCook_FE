@@ -27,14 +27,20 @@ export default {
     getField,
   },
   actions: {
-    async fetchIngredients({ commit, state }) {
+    async fetchIngredients({ commit, state, dispatch }) {
       const query = {
         method: "GET",
         url: `ingredient/getAll`,
       };
       await axios(query)
         .then((res) => {
-          commit(SET_INGREDIENTS, res.data.data);
+          if (res.data.code == 0) {
+            commit(SET_INGREDIENTS, res.data.data);
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
+          }
         })
         .catch((e) => {
           dispatch("adminGlobal/callAlert", e, {
@@ -42,7 +48,7 @@ export default {
           });
         });
     },
-    async fetchRecipes({ commit, state }) {
+    async fetchRecipes({ commit, state, dispatch }) {
       const query = {
         method: "GET",
         url: `recipe/search?keyword=${state.searchValue}&page=${
@@ -51,15 +57,21 @@ export default {
       };
       await axios(query)
         .then((res) => {
-          commit(SET_RECIPES, res.data.data.content);
-          commit(
-            "pagy/SET_PAGE",
-            {
-              page: res.data.data.number + 1,
-              pages: res.data.data.totalPages,
-            },
-            { root: true }
-          );
+          if (res.data.code == 0) {
+            commit(SET_RECIPES, res.data.data.content);
+            commit(
+              "pagy/SET_PAGE",
+              {
+                page: res.data.data.number + 1,
+                pages: res.data.data.totalPages,
+              },
+              { root: true }
+            );
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
+          }
         })
         .catch((e) => {
           dispatch("adminGlobal/callAlert", e, {
@@ -67,14 +79,20 @@ export default {
           });
         });
     },
-    async getRecipe({ commit, state }, id) {
+    async getRecipe({ commit, state, dispatch }, id) {
       const query = {
         method: "GET",
         url: `recipe/${id}`,
       };
       await axios(query)
         .then((res) => {
-          commit(SET_RECIPE, res.data.data);
+          if (res.data.code == 0) {
+            commit(SET_RECIPE, res.data.data);
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
+          }
         })
         .catch((e) => {
           dispatch("adminGlobal/callAlert", e, {
@@ -82,15 +100,21 @@ export default {
           });
         });
     },
-    async deleteRecipe({ commit, state }, id) {
+    async deleteRecipe({ commit, state, dispatch }, id) {
       const query = {
         method: "DELETE",
         url: `recipe/delete/${id}`,
       };
       await axios(query)
         .then((res) => {
-          if (state.recipes.length === 1) {
-            commit("pagy/RESET_PAGE", null, { root: true });
+          if (res.data.code == 0) {
+            if (state.recipes.length === 1) {
+              commit("pagy/RESET_PAGE", null, { root: true });
+            }
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
           }
         })
         .catch((e) => {
@@ -114,7 +138,13 @@ export default {
           },
         })
         .then(() => {
-          commit(RESET_RECIPE);
+          if (res.data.code == 0) {
+            commit(RESET_RECIPE);
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
+          }
         })
         .catch((e) => {
           dispatch("adminGlobal/callAlert", e, {
@@ -122,7 +152,7 @@ export default {
           });
         });
     },
-    async updateRecipe({ commit, state }, id) {
+    async updateRecipe({ commit, state, dispatch }, id) {
       let formData = new FormData();
       formData.append("id", id);
       formData.append("title", state.recipe.title);
@@ -142,10 +172,18 @@ export default {
           },
         })
         .then(() => {
-          commit(RESET_RECIPE);
+          if (res.data.code == 0) {
+            commit(RESET_RECIPE);
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
+          }
         })
         .catch((e) => {
-          console.log(e);
+          dispatch("adminGlobal/callAlert", e, {
+            root: true,
+          });
         });
     },
   },
