@@ -29,7 +29,7 @@ export default {
     clearToken({ commit }) {
       commit(CLEAR_TOKEN);
     },
-    async adminAuthenticate({ commit, state }) {
+    async adminAuthenticate({ commit, state, dispatch }) {
       commit(CLEAR_TOKEN);
       await axios
         .post("user/signin", {
@@ -38,11 +38,23 @@ export default {
         })
         .then((res) => {
           if (res.status == 200) {
-            commit(SET_TOKEN, res.data.data.token);
+            if (res.data.code === 0) {
+              commit(SET_TOKEN, res.data.data.token);
+            } else {
+              dispatch("adminGlobal/callAlert", res.data.data, {
+                root: true,
+              });
+            }
+          } else {
+            dispatch("adminGlobal/callAlert", res.data, {
+              root: true,
+            });
           }
         })
         .catch((e) => {
-          console.log(e);
+          dispatch("adminGlobal/callAlert", e, {
+            root: true,
+          });
         });
     },
     async callAlert({ commit, state }, payload) {

@@ -98,12 +98,6 @@ export default {
       default: () => [
         {
           link: "",
-          name: "Dashboard",
-          tooltip: "Dashboard",
-          icon: "bxs-dashboard",
-        },
-        {
-          link: "ingredient-categories",
           name: "Ingredient Categories",
           tooltip: "Ingredient Categories",
           icon: "bx-category-alt",

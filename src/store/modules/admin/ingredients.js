@@ -23,14 +23,20 @@ export default {
     getField,
   },
   actions: {
-    async fetchIngredientCategories({ commit, state }) {
+    async fetchIngredientCategories({ commit, state, dispatch }) {
       const query = {
         method: "GET",
         url: `ingredient-category/getAll`,
       };
       await axios(query)
         .then((res) => {
-          commit(SET_INGREDIENT_CATEGORIES, res.data.data);
+          if (res.data.code == 0) {
+            commit(SET_INGREDIENT_CATEGORIES, res.data.data);
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
+          }
         })
         .catch((e) => {
           dispatch("adminGlobal/callAlert", e, {
@@ -38,7 +44,7 @@ export default {
           });
         });
     },
-    async fetchIngredients({ commit, state }) {
+    async fetchIngredients({ commit, state, dispatch }) {
       const query = {
         method: "GET",
         url: `ingredient/search?keyword=${state.searchValue}&page=${
@@ -47,15 +53,21 @@ export default {
       };
       await axios(query)
         .then((res) => {
-          commit(SET_INGREDIENTS, res.data.data.content);
-          commit(
-            "pagy/SET_PAGE",
-            {
-              page: res.data.data.number + 1,
-              pages: res.data.data.totalPages,
-            },
-            { root: true }
-          );
+          if (res.data.code == 0) {
+            commit(SET_INGREDIENTS, res.data.data.content);
+            commit(
+              "pagy/SET_PAGE",
+              {
+                page: res.data.data.number + 1,
+                pages: res.data.data.totalPages,
+              },
+              { root: true }
+            );
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
+          }
         })
         .catch((e) => {
           dispatch("adminGlobal/callAlert", e, {
@@ -63,14 +75,20 @@ export default {
           });
         });
     },
-    async getIngredient({ commit, state }, id) {
+    async getIngredient({ commit, state, dispatch }, id) {
       const query = {
         method: "GET",
         url: `ingredient/${id}`,
       };
       await axios(query)
         .then((res) => {
-          commit(SET_INGREDIENT, res.data.data);
+          if (res.data.code == 0) {
+            commit(SET_INGREDIENT, res.data.data);
+          } else {
+            dispatch("adminGlobal/callAlert", res.data.data, {
+              root: true,
+            });
+          }
         })
         .catch((e) => {
           dispatch("adminGlobal/callAlert", e, {
