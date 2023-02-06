@@ -244,19 +244,13 @@ export default {
         },
         callback: async (confirm) => {
           if (confirm) {
-            try {
-              console.log(item.id);
-              await this.deleteRecipe(item.id);
-              this.fetchRecipes();
-            } catch (e) {
-              console.log(e);
-            }
+            await this.deleteRecipe(item.id);
+            this.fetchRecipes();
           }
         },
       });
     },
     showModal(param) {
-      console.log(param);
       this.id = param;
       if (param == "add") {
         this.title = "Add new";

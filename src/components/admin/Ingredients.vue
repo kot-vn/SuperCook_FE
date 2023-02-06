@@ -190,12 +190,8 @@ export default {
         },
         callback: async (confirm) => {
           if (confirm) {
-            try {
-              await this.deleteIngredient(item.id);
-              this.fetchIngredients();
-            } catch (e) {
-              console.log(e);
-            }
+            await this.deleteIngredient(item.id);
+            this.fetchIngredients();
           }
         },
       });

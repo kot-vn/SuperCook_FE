@@ -203,12 +203,8 @@ export default {
         },
         callback: async (confirm) => {
           if (confirm) {
-            try {
-              await this.deleteIngredientCategories(item.id);
-              this.fetchIngredientCategories();
-            } catch (e) {
-              console.log(e);
-            }
+            await this.deleteIngredientCategories(item.id);
+            this.fetchIngredientCategories();
           }
         },
       });
