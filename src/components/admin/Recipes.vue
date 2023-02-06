@@ -155,12 +155,13 @@
           invalid-feedback="Content is required"
           :state="content != null && content != ''"
         >
-          <b-form-input
+          <textarea
             id="content-input"
             v-model="content"
             :state="content != null && content != ''"
             required
-          ></b-form-input>
+            class="form-control"
+          ></textarea>
         </b-form-group>
       </form>
     </b-modal>
