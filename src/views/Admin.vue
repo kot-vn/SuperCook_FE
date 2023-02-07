@@ -1,5 +1,7 @@
 <template>
-  <router-view></router-view>
+  <div class="admin-wrapper">
+    <router-view></router-view>
+  </div>
 </template>
 
 <style lang="scss">

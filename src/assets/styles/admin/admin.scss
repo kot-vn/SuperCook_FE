@@ -1,5 +1,9 @@
 @import "@/assets/styles/common.scss";
 
+.admin-wrapper {
+  overflow: hidden;
+  height: 100vh;
+}
 .admin-login {
   .forms-inputs {
     position: relative;
@@ -38,6 +42,8 @@
 .admin-main {
   background: url("@/assets/images/vegetable_pattern.svg")
     var(--background-pink);
+  background-attachment: fixed;
+  height: 100vh;
   .admin-content-section {
     .admin-card-header {
       h4 {
@@ -45,6 +51,8 @@
       }
     }
     .admin-card-body {
+      overflow: auto;
+      height: 88vh;
       .table {
         .item-icon {
           width: 50px;
