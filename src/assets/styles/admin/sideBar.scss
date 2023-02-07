@@ -10,7 +10,7 @@
   width: 78px;
   background: #2a3042;
   z-index: 99;
-  transition: all 0.5s ease;
+  transition: 0.2s all ease-in-out;
   i {
     color: white;
     height: 60px;
@@ -30,14 +30,14 @@
     }
     .icon {
       opacity: 0;
-      transition: all 0.5s ease;
+      transition: 0.2s all ease-in-out;
     }
     .logo_name {
       color: white;
       font-size: 20px;
       font-weight: 600;
       opacity: 0;
-      transition: all 0.5s ease;
+      transition: 0.2s all ease-in-out;
       .master-title {
         color: white;
       }
@@ -47,10 +47,10 @@
       right: 0;
       transform: translateY(-50%);
       font-size: 22px;
-      transition: all 0.4s ease;
+      transition: 0.2s all ease-in-out;
       font-size: 23px;
       cursor: pointer;
-      transition: all 0.5s ease;
+      transition: 0.2s all ease-in-out;
     }
   }
   .menu-nav-list {
@@ -86,7 +86,7 @@
             .tooltip {
               opacity: 1;
               pointer-events: auto;
-              transition: all 0.4s ease;
+              transition: 0.2s all ease-in-out;
               top: 50%;
               transform: translateY(-50%);
             }
@@ -95,12 +95,12 @@
             height: 100%;
             width: 100%;
             border-radius: 12px;
-            transition: all 0.4s ease;
+            transition: 0.2s all ease-in-out;
             &:hover {
               background: var(--background-pink);
               .links_name,
               i {
-                transition: all 0.5s ease;
+                transition: 0.2s all ease-in-out;
               }
             }
             .links_name {
@@ -110,7 +110,7 @@
               white-space: nowrap;
               opacity: 0;
               pointer-events: none;
-              transition: 0.4s;
+              transition: 0.2s all ease-in-out;
             }
             i {
               height: 50px;
@@ -128,7 +128,7 @@
       color: white;
       padding: 10px 14px;
       background: #1d1b31;
-      transition: all 0.5s ease;
+      transition: 0.2s all ease-in-out;
       overflow: hidden;
       #log_out {
         top: 50%;
@@ -139,7 +139,7 @@
         height: 60px;
         line-height: 60px;
         border-radius: 0px;
-        transition: all 0.5s ease;
+        transition: 0.2s all ease-in-out;
         &:hover {
           color: red;
           cursor: pointer;
