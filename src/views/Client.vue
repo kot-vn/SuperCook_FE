@@ -12,6 +12,15 @@
         "
         class="main-search-result pl-2 overflow-auto"
       >
+        <div v-if="ingredientSearchValue.length != 0" class="mt-4">
+          <div
+            class="ingredientTag p-2 my-1 ml-2"
+            v-for="item in ingredientSearchValue"
+            @click="searchRecipes(item)"
+          >
+            {{ item.name }}
+          </div>
+        </div>
         <h3 class="py-4 px-2">
           You can make {{ pages.totalElements }} recipes
         </h3>
@@ -55,6 +64,7 @@ import RecipeItem from "@/components/client/RecipeItem.vue";
 import RecipeSidebar from "@/components/client/RecipeSidebar.vue";
 import SharedHeader from "@/components/client/shared/SharedHeader.vue";
 import SharedSidebar from "@/components/client/shared/SharedSidebar.vue";
+import { mapFields } from "vuex-map-fields";
 import Pagy from "@/components/admin/shared/Pagy.vue";
 
 const { mapActions, mapState } = createNamespacedHelpers("client");
@@ -74,8 +84,12 @@ export default {
     };
   },
   computed: {
-    ...mapState(["recipes", "ingredientSearchValue", "searchValue"]),
+    ...mapState(["recipes", "searchValue"]),
     ...pagyMaper.mapState(["pages"]),
+    ...mapFields("client", {
+      ingredientSearchValue: "ingredientSearchValue",
+      searchValue: "searchValue",
+    }),
   },
   mounted() {
     this.RESET_PAGE();
@@ -99,6 +113,27 @@ export default {
       } else {
         this.fetchRecipes();
       }
+    },
+    async searchRecipes(payload) {
+      await this.RESET_PAGE();
+      this.searchValue = "";
+      this.setIngredient(payload);
+      this.fetchRecipes();
+    },
+    isActive(id) {
+      return this.ingredientSearchValue.find((x) =>
+        x.id === id ? true : false
+      );
+    },
+    setIngredient(payload) {
+      this.isActive(payload.id)
+        ? this.ingredientSearchValue.splice(
+            this.ingredientSearchValue.findIndex(function (i) {
+              return i.id === payload.id;
+            }),
+            1
+          )
+        : this.ingredientSearchValue.push(payload);
     },
   },
 };

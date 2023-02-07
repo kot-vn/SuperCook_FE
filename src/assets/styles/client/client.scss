@@ -130,6 +130,19 @@
 }
 .main {
   .main-search-result {
+    .ingredientTag {
+      border-radius: 15px;
+      border: 1px solid var(--success-green);
+      color: var(--success-green);
+      width: fit-content;
+      display: inline-block;
+      transition: 0.2s all ease-in-out;
+      &:hover {
+        background-color: var(--success-green);
+        color: white;
+        cursor: pointer;
+      }
+    }
     .recipe-list {
       .recipe-item {
         @media only screen and (max-width: 1100px) {
