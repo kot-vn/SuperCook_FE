@@ -13,6 +13,7 @@
                 <input
                   autocomplete="off"
                   type="text"
+                  maxlength="225"
                   placeholder="Enter your email..."
                   id="field1"
                   v-model="email"
@@ -30,6 +31,7 @@
                   autocomplete="off"
                   placeholder="Enter your password..."
                   id="field2"
+                  maxlength="225"
                   type="password"
                   v-model="password"
                   v-bind:class="{
