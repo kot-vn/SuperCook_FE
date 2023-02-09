@@ -15,6 +15,7 @@
           v-model="searchValue"
           class="pl-5"
           type="text"
+          maxlength="225"
           placeholder="Find..."
           @input="searchRecipes"
         >

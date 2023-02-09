@@ -17,6 +17,7 @@
               <label>Search</label>
               <b-form-input
                 v-model="searchValue"
+                maxlength="225"
                 class="form-control"
                 @keyup="fetchData"
               ></b-form-input>
@@ -86,6 +87,7 @@
           <b-form-input
             id="name-input"
             v-model="categoryName"
+            maxlength="225"
             :state="categoryName.length != 0"
             required
           ></b-form-input>
